@@ -12,7 +12,7 @@ class TodoRepositoryImpl implements TodoRepository{
   Future<Either<Failure, Todo>> add(Todo todo)async {
     try{
       final result = await remoteDatabase.addTodo(todo);
-      return Right(todo);
+      return Right(result);
     }catch(e){
       return Left(Failure("Something went wrong"));
     }
@@ -22,7 +22,7 @@ class TodoRepositoryImpl implements TodoRepository{
   Future<Either<Failure, Todo>> delete(Todo todo)async {
     try{
       final result = await remoteDatabase.deleteTodo(todo);
-      return Right(todo);
+      return Right(result);
     }catch(e){
       return Left(Failure("Something went wrong"));
     }
@@ -33,16 +33,16 @@ class TodoRepositoryImpl implements TodoRepository{
   Future<Either<Failure, Todo>> edit(Todo todo) async{
     try{
       final result = await remoteDatabase.editTodo(todo);
-      return Right(todo);
+      return Right(result);
     }catch(e){
       return Left(Failure("Something went wrong"));
     }
   }
 
   @override
-  Future<Either<Failure, List<Todo>>> getAll() async{
+  Future<Either<Failure, Stream<List<Todo>>>> getAll() async{
     try{
-      final result = await remoteDatabase.listTodos();
+      final result =  remoteDatabase.listTodos();
       return Right(result);
     }catch(e){
       return Left(Failure("Something went wrong"));

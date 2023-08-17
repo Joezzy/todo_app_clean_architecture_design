@@ -6,7 +6,7 @@ abstract class TodoRemoteDatabase{
   Future<Todo> addTodo(Todo todo);
   Future<Todo> editTodo(Todo todo);
   Future<Todo> deleteTodo(Todo todo);
-  Future<List<Todo>> listTodos();
+  Stream<List<Todo>> listTodos();
 }
 
 
@@ -39,12 +39,14 @@ class TodoRemoteDatabaseImpl implements TodoRemoteDatabase{
   }
 
   @override
-  Future<List<Todo>> listTodos() async{
-    final todosData=
-    await FirebaseFirestore.instance
+  Stream<List<Todo>> listTodos() async* {
+    // final todosData=
+    yield* FirebaseFirestore.instance
         .collection("todos")
-       .get() ;
-    return todosData.docs.map((e) => Todo.fromJson(e.data())).toList();
+       .snapshots()
+    .map((snapshot) {
+      return snapshot.docs.map((e) => Todo.fromJson(e.data())).toList();
+    });
   }
   
 }

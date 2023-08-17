@@ -29,6 +29,13 @@
             {
               "client_id": "487453644062-giqld9lknhtaodda6mbqhspl19297b6a.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "487453644062-hp9tgv0pvt4hmb5pg0nriihduf9bpss8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.todoCleanArchitecture"
+              }
             }
           ]
         }
