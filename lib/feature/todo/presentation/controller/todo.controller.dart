@@ -65,6 +65,18 @@ void clearText(){
     );
   }
 
+  Future<void> editTodo(id) async {
+
+    final results = await editTodoUseCase(Params(Todo(
+      id: id,
+      text: titleController.text.trim(),
+      description: descriptionController.text.trim(),)));
+
+    results.fold(
+          (failure) => Get.snackbar("Error", failure.message),
+          (r) => Get.snackbar("Success", "Todo edited successfully"),
+    );
+  }
 
 
   String generateId(int length) {
