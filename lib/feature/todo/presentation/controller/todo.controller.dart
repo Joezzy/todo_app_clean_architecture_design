@@ -47,6 +47,17 @@ void clearText(){
   }
 
 
+  Stream<List<Todo>> getTodo() async* {
+    final result=await getTodoUseCase(NoParams());
+    yield* result.fold((failure) {
+      Get.snackbar("Failed", failure.message);
+      return Stream.value([]);
+    }, (todoList) {
+      return todoList;
+    });
+
+  }
+
 
 
   String generateId(int length) {
