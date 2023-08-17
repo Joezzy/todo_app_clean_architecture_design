@@ -57,6 +57,13 @@ void clearText(){
     });
 
   }
+  Future<void> deleteTodo(Todo todo) async {
+    final results = await deleteTodoUseCase(Params(todo));
+    results.fold(
+          (failure) => Get.snackbar("Error", failure.message),
+          (r) => Get.snackbar("Success", "Todo deleted successfully"),
+    );
+  }
 
 
 
