@@ -74,7 +74,10 @@ void clearText(){
 
     results.fold(
           (failure) => Get.snackbar("Error", failure.message),
-          (r) => Get.snackbar("Success", "Todo edited successfully"),
+          (r){
+            clearText();
+            Get.snackbar("Success", "Todo edited successfully");
+          },
     );
   }
 
